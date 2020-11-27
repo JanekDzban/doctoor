@@ -1,7 +1,9 @@
+const Alexa = require('ask-sdk-core');
+
 const MedicinesRemidnerIntentHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
-            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'HelloWorldIntent';
+            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'MedicinesRemidnerIntent';
     },
     handle(handlerInput) {
         const speakOutput = 'MedicinesRemidnerIntentHandler';
@@ -13,6 +15,6 @@ const MedicinesRemidnerIntentHandler = {
     }
 };
 
-module.exports.HelloWorldIntentHandler = function get () {
-    return HelloWorldIntentHandler;
+module.exports.MedicinesRemidnerIntentHandler = function get () {
+    return MedicinesRemidnerIntentHandler;
 }
