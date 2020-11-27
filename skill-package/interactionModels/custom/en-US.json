@@ -34,7 +34,7 @@
           "samples": []
         },
         {
-          "name": "MedicinesReminder",
+          "name": "MedicinesReminderIntent",
           "slots": [
             {
               "name": "medicine",
@@ -72,7 +72,7 @@
     "dialog": {
       "intents": [
         {
-          "name": "MedicinesReminder",
+          "name": "MedicinesReminderIntent",
           "confirmationRequired": false,
           "prompts": {},
           "slots": [
@@ -143,5 +143,5 @@
       }
     ]
   },
-  "version": "5"
+  "version": "6"
 }
