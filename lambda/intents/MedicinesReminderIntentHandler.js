@@ -15,6 +15,4 @@ const MedicinesRemidnerIntentHandler = {
     }
 };
 
-module.exports.MedicinesRemidnerIntentHandler = function get () {
-    return MedicinesRemidnerIntentHandler;
-}
+module.exports = MedicinesRemidnerIntentHandler;
