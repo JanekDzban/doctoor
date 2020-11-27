@@ -3,7 +3,7 @@
 // session persistence, api calls, and more.
 const Alexa = require('ask-sdk-core');
 
-const MedicinesRemidnerIntentHandler = require('./intents/MedicinesRemidnerIntentHandler.js');
+const MedicinesReminderIntentHandler = require('./intents/MedicinesReminderIntentHandler.js');
 
 const LaunchRequestHandler = {
     canHandle(handlerInput) {
@@ -111,7 +111,7 @@ exports.handler = Alexa.SkillBuilders.custom()
     .addRequestHandlers(
         LaunchRequestHandler,
         HelloWorldIntentHandler,
-        MedicinesRemidnerIntentHandler,
+        MedicinesReminderIntentHandler,
         HelpIntentHandler,
         CancelAndStopIntentHandler,
         SessionEndedRequestHandler,
