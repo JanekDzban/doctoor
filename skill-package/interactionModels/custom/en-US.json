@@ -19,6 +19,7 @@
           "name": "HelloWorldIntent",
           "slots": [],
           "samples": [
+            "holla",
             "hello",
             "how are you",
             "say hi world",
@@ -31,10 +32,116 @@
         {
           "name": "AMAZON.NavigateHomeIntent",
           "samples": []
+        },
+        {
+          "name": "MedicinesReminder",
+          "slots": [
+            {
+              "name": "medicine",
+              "type": "AMAZON.SearchQuery",
+              "samples": [
+                "I should take the {medicine}",
+                "I should take {medicine}",
+                "{medicine}"
+              ]
+            },
+            {
+              "name": "date",
+              "type": "AMAZON.DATE",
+              "samples": [
+                "on {date}",
+                "{date}"
+              ]
+            },
+            {
+              "name": "time",
+              "type": "AMAZON.TIME",
+              "samples": [
+                "{time}",
+                "at {time}"
+              ]
+            }
+          ],
+          "samples": [
+            "Remind me about taking {medicine}"
+          ]
         }
       ],
       "types": []
-    }
+    },
+    "dialog": {
+      "intents": [
+        {
+          "name": "MedicinesReminder",
+          "confirmationRequired": false,
+          "prompts": {},
+          "slots": [
+            {
+              "name": "medicine",
+              "type": "AMAZON.SearchQuery",
+              "elicitationRequired": true,
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Slot.1388899960576.734412436443"
+              }
+            },
+            {
+              "name": "date",
+              "type": "AMAZON.DATE",
+              "elicitationRequired": true,
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Slot.1388899960576.19399683292"
+              }
+            },
+            {
+              "name": "time",
+              "type": "AMAZON.TIME",
+              "elicitationRequired": true,
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Slot.1388899960576.605210575817"
+              }
+            }
+          ],
+          "delegationStrategy": "ALWAYS"
+        }
+      ],
+      "delegationStrategy": "ALWAYS"
+    },
+    "prompts": [
+      {
+        "id": "Elicit.Slot.1388899960576.734412436443",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "Which medicine should you take?"
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Slot.1388899960576.19399683292",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "Which day you should take it?"
+          },
+          {
+            "type": "PlainText",
+            "value": "Which day?"
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Slot.1388899960576.605210575817",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "What time should I remind you?"
+          }
+        ]
+      }
+    ]
   },
-  "version": "1"
+  "version": "5"
 }
