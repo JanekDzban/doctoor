@@ -7,14 +7,14 @@
         },
         "interfaces": [],
         "regions": {
-          "NA": {
-            "endpoint": {
-              "uri": "arn:aws:lambda:us-east-1:842776957764:function:8e93a926-0a2a-4fdf-b1db-fd216179d85a:Release_0"
-            }
-          },
           "EU": {
             "endpoint": {
               "uri": "arn:aws:lambda:eu-west-1:842776957764:function:8e93a926-0a2a-4fdf-b1db-fd216179d85a:Release_0"
+            }
+          },
+          "NA": {
+            "endpoint": {
+              "uri": "arn:aws:lambda:us-east-1:842776957764:function:8e93a926-0a2a-4fdf-b1db-fd216179d85a:Release_0"
             }
           },
           "FE": {
@@ -25,6 +25,11 @@
         }
       }
     },
+    "permissions": [
+      {
+        "name": "alexa::alerts:reminders:skill:readwrite"
+      }
+    ],
     "publishingInformation": {
       "locales": {
         "en-US": {

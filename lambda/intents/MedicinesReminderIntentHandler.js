@@ -6,6 +6,14 @@ const MedicinesReminderIntentHandler = {
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'MedicinesReminderIntent';
     },
     handle(handlerInput) {
+        const reminderApiClient = handlerInput.serviceClientFactory.getReminderManagementServiceClient(),
+            {permisions} = handlerInput.requestEnvelope.context.System.user;
+        if(!permisions) {
+            return handlerInput.responseBuilder
+                .speak("Please go to the Alexa mobile app to grant reminders permissions.")
+                .withAskForPermissionsConsentCard(['alexa::alerts:reminders:skill:readwrite'])
+                .getResponse();
+        }
         const speakOutput = 'MedicinesReminderIntentHandler';
         console.log('MedicinesRemindnerIntentHandler');
         return handlerInput.responseBuilder
