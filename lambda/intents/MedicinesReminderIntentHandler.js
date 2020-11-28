@@ -47,7 +47,7 @@ const MedicinesReminderIntentHandler = {
         }
 
         if(slots.isRecurring.value === "true" || 
-            slots.isRecurring.resolutions.resolutionsPerAuthority.values[0].value === "true") {
+            slots.isRecurring.resolutions.resolutionsPerAuthority[0].values[0].value === "true") {
             if(slots.frequency.value) {
                 const scheduledMoment = Moment(scheduledTime, Settings.dates.format);
                 reminderRequest.trigger.recurrence = {
