@@ -1,5 +1,5 @@
 const Alexa = require('ask-sdk-core');
-const Settings = require('app-settings')("../settings.yml");
+const Settings = require('../config.js')
 const Moment = require('moment-timezone');
 
 const MedicinesReminderIntentHandler = {
