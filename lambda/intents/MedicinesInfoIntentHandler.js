@@ -48,6 +48,8 @@ const lookupMedicine = (medicineName) => {
             		reject(0);
             	}
             
+                console.log("retrieving data!!");
+                console.log(data);
             	const eventStream = data.Payload;
             	
             	eventStream.on('data', (event) => {
@@ -55,9 +57,9 @@ const lookupMedicine = (medicineName) => {
             			returnVal = event.Records.Payload.toString();
             			resolve(returnVal);
             		} else if (event.Stats) {
-            			//console.log(`Processed ${event.Stats.Details.BytesProcessed} bytes`);
+            			console.log(`Processed ${event.Stats.Details.BytesProcessed} bytes`);
             		} else if (event.End) {
-            		    //console.log('SelectObjectContent completed');
+            		    console.log('SelectObjectContent completed');
             		}
             	});
             
