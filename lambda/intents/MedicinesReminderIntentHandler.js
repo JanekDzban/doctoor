@@ -47,21 +47,24 @@ const MedicinesReminderIntentHandler = {
             }
         }
         console.log(`slots.isRecurring.value = ${getSynonymSlotValue(slots.isRecurring.name, slots)}`);
-        console.log(getSynonymSlotValue(slots.isRecurring.name, slots));
         if(slots.isRecurring.value === "true" || getSynonymSlotValue(slots.isRecurring.name, slots) === "true") {
             if(slots.frequency.value) {
-                console.log(`slots.frequency.value = ${getSynonymSlotValue(slots.frequency.name, slots)}`);
+                const frequency = getSynonymSlotValue(slots.frequency.name, slots);
+                console.log(`slots.frequency.value = ${frequency}`);
                 reminderRequest.trigger.recurrence = {
                     "startDateTime": scheduledTime,
-                    //"endDateTime" : "2019-08-10T10:00:00.000",
                     "recurrenceRules" : [
-                        `FREQ=${getSynonymSlotValue(slots.frequency.name, slots).toUpperCase()};
+                        `FREQ=${frequency.toUpperCase()};
                         BYHOUR=${scheduledMoment.hour()};
-                        BYMINUTE=${scheduledMoment.minute()};
-                        BYSECOND=${scheduledMoment.second()};
-                        INTERVAL=1;`,
+                        BYMINUTE=${scheduledMoment.minute()}`
                     ]
                 }
+                var add = "";
+                switch(frequency) {
+                    case "weekly": add = `;BYDAY=${scheduledMoment.format("dd").toUpperCase()};`; break;
+                    case "monthly": add = `;BYMONTHDAY=${scheduledMoment.format("D")}`; break;
+                }
+                reminderRequest.trigger.reccurence.reccurenceRules[0] += add;
             } else { 
                 return handlerInput.responseBuilder
                     .speak("How often this reminder should be repeated? You can set daily, weekly, or monthly reminder.")
