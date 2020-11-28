@@ -4,6 +4,7 @@
 const Alexa = require('ask-sdk-core');
 
 const MedicinesReminderIntentHandler = require('./intents/MedicinesReminderIntentHandler.js');
+const MedicinesInfoIntentHandler = require('./intents/MedicinesInfoIntentHandler.js');
 
 const LaunchRequestHandler = {
     canHandle(handlerInput) {
@@ -112,6 +113,7 @@ exports.handler = Alexa.SkillBuilders.custom()
         LaunchRequestHandler,
         HelloWorldIntentHandler,
         MedicinesReminderIntentHandler,
+        MedicinesInfoIntentHandler,
         HelpIntentHandler,
         CancelAndStopIntentHandler,
         SessionEndedRequestHandler,
