@@ -23,7 +23,7 @@ const lookupMedicine = (medicineName) => {
     var fs = require('fs');
     var obj = JSON.parse(fs.readFileSync('./intents/data.json', 'utf8'));
 
-    console.log(obj);
+    console.log(obj['xanax']);
     return "dupa";
 }
 
