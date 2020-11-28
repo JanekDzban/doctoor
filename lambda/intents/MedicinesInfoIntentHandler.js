@@ -8,7 +8,7 @@ const MedicinesInfoIntentHandler = {
     handle(handlerInput) {
         const drugName = handlerInput.requestEnvelope.request.intent.slots.medicineName.value;
         
-       	var myParams = { Bucket: '8e93a926-0a2a-4fdf-b1db-fd216179d85a-eu-west-1', Key: 'myobject' };
+       	var myParams = { Bucket: '8e93a926-0a2a-4fdf-b1db-fd216179d85a-eu-west-1', Key: 'Media/Doctoor.MedicinesInfo/RPL.csv' };
     	var AWS = require('aws-sdk'); var s3 = new AWS.S3();
         
         return handlerInput.responseBuilder
