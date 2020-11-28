@@ -1,5 +1,14 @@
 const Alexa = require('ask-sdk-core');
 
+const MongoClient = require('mongodb').MongoClient;
+const uri = "mongodb+srv://drugdb:drugdbadmin@cluster0.zoed5.mongodb.net/drugsDB?retryWrites=true&w=majority";
+const client = new MongoClient(uri, { useNewUrlParser: true });
+client.connect(err => {
+    const collection = client.db("database").collection("data");
+    console.log(collection.countDocuments());
+    client.close();
+});
+
 const MedicinesInfoIntentHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
