@@ -10,9 +10,9 @@ const MedicinesInfoIntentHandler = {
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'MedicinesInfoIntent';
     },
     handle(handlerInput) {
-        const speakOutput = 'Tada!';
+        
         return handlerInput.responseBuilder
-            .speak(speakOutput)
+            .speak(handlerInput.requestEnvelope.request.intent.slots.medicineName.value)
             //.reprompt('add a reprompt if you want to keep the session open for the user to respond')
             .getResponse();
     }
