@@ -48,6 +48,7 @@ const MedicinesReminderIntentHandler = {
 
         if(slots.isRecurring.value === "true" || 
             slots.isRecurring.resolutions.resolutionsPerAuthority[0].values[0].value === "true") {
+            console.log(`slots.frequency.value = ${slots.frequency.value}`);
             if(slots.frequency.value) {
                 const scheduledMoment = Moment(scheduledTime, Settings.dates.format);
                 reminderRequest.trigger.recurrence = {
@@ -61,7 +62,8 @@ const MedicinesReminderIntentHandler = {
                         INTERVAL=1;`,
                     ]
                 }
-            } else return handlerInput.responseBuilder
+            } else { 
+                return handlerInput.responseBuilder
                 .speak("How often this reminder should be repeated? You can set daily, weekly, or monthly reminder.")
                 .addElicitSlotDirective("frequency", {
                     name: "MedicinesReminderIntent",
@@ -70,6 +72,7 @@ const MedicinesReminderIntentHandler = {
                 })
                 .reprompt()
                 .getResponse();
+            }
         }
 
         const reminderApiClient = handlerInput.serviceClientFactory.getReminderManagementServiceClient();
@@ -79,8 +82,9 @@ const MedicinesReminderIntentHandler = {
             slots.isRecurring.resolutions.resolutionsPerAuthority[0].values[0].value === "true") {
             speakOutput += `The reminder will be repeated ${slots.frequency}.`;
         }
+        console.log(reminderRequest);
+        console.log(speakOutput);
         try {
-            console.log(reminderRequest);
             await reminderApiClient.createReminder(reminderRequest);
         } catch(error) {
             console.log(error);
