@@ -76,7 +76,7 @@ const MedicinesReminderIntentHandler = {
         var speakOutput = `You have successfully scheduled a reminder for taking 
             ${slots.medicine.value} on ${slots.date.value} at ${slots.time.value}.`;
         if(slots.isRecurring.value === "true" || 
-            slots.isRecurring.resolutions.resolutionsPerAuthority.values[0].value === "true") {
+            slots.isRecurring.resolutions.resolutionsPerAuthority[0].values[0].value === "true") {
             speakOutput += `The reminder will be repeated ${slots.frequency}.`;
         }
         try {
