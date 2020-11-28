@@ -20,7 +20,7 @@ const MedicinesInfoIntentHandler = {
 const lookupMedicine = (medicineName) => {
     return new Promise((resolve, reject) => {
         try {
-            const bucketName = process.env.S3_PERSISTENCE_BUCKET;
+            const bucketName = '8e93a926-0a2a-4fdf-b1db-fd216179d85a-eu-west-1'; //process.env.S3_PERSISTENCE_BUCKET;
             const keyName = 'Media/Doctoor.MedicinesInfo/RPL.csv';
             const query = `SELECT id from S3Object s WHERE s.name ='${medicineName}' LIMIT 1`;
             let returnVal = 0;
