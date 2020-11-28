@@ -1,5 +1,4 @@
 const Alexa = require('ask-sdk-core');
-const MedicinesInfoDB = require('./MedicinesInfoDB.js')
 
 
 const MedicinesInfoIntentHandler = {
