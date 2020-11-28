@@ -1,3 +1,6 @@
+const Alexa = require('ask-sdk-core');
+const https = require('https');
+
 const MedicinesConflictIntentHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
