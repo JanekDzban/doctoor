@@ -55,7 +55,7 @@ const MedicinesReminderIntentHandler = {
                     //"startDateTime": "2019-05-10T6:00:00.000",
                     //"endDateTime" : "2019-08-10T10:00:00.000",
                     "recurrenceRules" : [
-                        `FREQ=${getSynonymSlotValue(slots.frequency.name, slots)};
+                        `FREQ=${getSynonymSlotValue(slots.frequency.name, slots).toUpperCase()};
                         BYHOUR=${scheduledMoment.hour()};
                         BYMINUTE=${scheduledMoment.minute()};
                         BYSECOND=${scheduledMoment.second()};
@@ -66,13 +66,7 @@ const MedicinesReminderIntentHandler = {
                 return handlerInput.responseBuilder
                     .speak("How often this reminder should be repeated? You can set daily, weekly, or monthly reminder.")
                     .addElicitSlotDirective('frequency', reqEnv.request.intent)
-                /*.addElicitSlotDirective("frequency", {
-                    name: "MedicinesReminderIntent",
-                    confirmationStatus: "NONE",
-                    slots: {}
-                })*/
-                //.reprompt()
-                .getResponse();
+                    .getResponse();
             }
         }
 
@@ -83,7 +77,7 @@ const MedicinesReminderIntentHandler = {
         if(scheduledMoment.minute() > 0) {
             speakOutput += `:${('0' + scheduledMoment.minute()).slice(-2)}`;
         }
-        if(slots.isRecurring.value === "true" || getSynonymSlotValue(slots.isReccuring.name, slots) === "true") {
+        if(slots.isRecurring.value === "true" || getSynonymSlotValue(slots.isRecurring.name, slots) === "true") {
             speakOutput += `The reminder will be repeated ${slots.frequency}.`;
         }
         console.log(reminderRequest);
