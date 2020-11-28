@@ -24,7 +24,7 @@ const lookupMedicine = (medicineName) => {
     var obj = JSON.parse(fs.readFileSync('./intents/data.json', 'utf8'));
 
     console.log(obj);
-    return obj.description;
+    return "dupa";
 }
 
 /*
