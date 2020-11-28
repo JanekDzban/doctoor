@@ -52,7 +52,7 @@ const MedicinesReminderIntentHandler = {
             console.log(`slots.frequency.value = ${slots.frequency.value}`);
             if(slots.frequency.value) {
                 reminderRequest.trigger.recurrence = {
-                    //"startDateTime": "2019-05-10T6:00:00.000",
+                    "startDateTime": scheduledTime,
                     //"endDateTime" : "2019-08-10T10:00:00.000",
                     "recurrenceRules" : [
                         `FREQ=${getSynonymSlotValue(slots.frequency.name, slots).toUpperCase()};
