@@ -29,7 +29,7 @@ const MedicinesReminderIntentHandler = {
             "requestTime" : Moment().tz(Settings.dates.timezone).format(Moment.ISO_8601),
             "trigger": {
                 "type" : "SCHEDULED_ABSOLUTE",
-                "scheduledTime" : `${slots.date}T${slots.time}`,
+                "scheduledTime" : `${slots.date.value}T${slots.time.value}`,
                 "timeZoneId" : Settings.dates.timezone,
                 /*"recurrence" : {                     
                     "startDateTime": "2019-05-10T6:00:00.000",                       
@@ -45,7 +45,7 @@ const MedicinesReminderIntentHandler = {
                 "spokenInfo": {
                     "content": [{
                         "locale": "en-US", 
-                        "text": `You should take ${slots.medicine} right now!`,
+                        "text": `You should take ${slots.medicine.value} right now!`,
                     }]
                 }
             },
@@ -56,7 +56,7 @@ const MedicinesReminderIntentHandler = {
 
         const reminderApiClient = handlerInput.serviceClientFactory.getReminderManagementServiceClient();
         var speakOutput = `You have successfully scheduled a reminder for taking 
-            ${slots.medicine} on ${slots.date} at ${slots.time}`;
+            ${slots.medicine.value} on ${slots.date.value} at ${slots.time.value}`;
         try {
             await reminderApiClient.createReminder(reminderRequest);
         } catch(error) {
