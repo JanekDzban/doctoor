@@ -47,16 +47,15 @@ const MedicinesReminderIntentHandler = {
             }
         }
         console.log(`slots.isRecurring.value = ${slots.isRecurring.value}`);
-        console.log(slots.isRecurring.resolutions.resolutionsPerAuthority[0].values[0].value);
-        if(slots.isRecurring.value === "true" || 
-            slots.isRecurring.resolutions.resolutionsPerAuthority[0].values[0].value === "true") {
+        console.log(getSynonymSlotValue(slots.isRecurring.name, slots));
+        if(slots.isRecurring.value === "true" || getSynonymSlotValue(slots.isRecurring.name, slots) === "true") {
             console.log(`slots.frequency.value = ${slots.frequency.value}`);
             if(slots.frequency.value) {
                 reminderRequest.trigger.recurrence = {
                     //"startDateTime": "2019-05-10T6:00:00.000",
                     //"endDateTime" : "2019-08-10T10:00:00.000",
                     "recurrenceRules" : [
-                        `FREQ=${slots.frequency};
+                        `FREQ=${getSynonymSlotValue(slots.frequency.name, slots)};
                         BYHOUR=${scheduledMoment.hour()};
                         BYMINUTE=${scheduledMoment.minute()};
                         BYSECOND=${scheduledMoment.second()};
@@ -79,9 +78,11 @@ const MedicinesReminderIntentHandler = {
         const reminderApiClient = handlerInput.serviceClientFactory.getReminderManagementServiceClient();
         var speakOutput = `You have successfully scheduled a reminder for taking 
             ${slots.medicine.value} on ${slots.date.value} 
-            at ${scheduledMoment.hour().toString()}:${scheduledMoment.minute().toString().replace(":00","")}.`;
-        if(slots.isRecurring.value === "true" || 
-            slots.isRecurring.resolutions.resolutionsPerAuthority[0].values[0].value === "true") {
+            at ${scheduledMoment.hour()}`;
+        if(scheduledMoment.minute() > 0) {
+            speakOutput += `:${('0' + scheduledMoment.minute()).slice(-2)}`;
+        }
+        if(slots.isRecurring.value === "true" || getSynonymSlotValue(slots.isReccuring.name, slots) === "true") {
             speakOutput += `The reminder will be repeated ${slots.frequency}.`;
         }
         console.log(reminderRequest);
@@ -107,6 +108,10 @@ function mapTimeToHour(time) {
         "NI" : "23:00"
     }
     return map[time] ? map[time] : time;
+}
+
+function getSynonymSlotValue(slotName, slots) {
+    return slots[slotName].resolutions.resolutionsPerAuthority[0].values[0].value.name;
 }
 
 module.exports = MedicinesReminderIntentHandler;
