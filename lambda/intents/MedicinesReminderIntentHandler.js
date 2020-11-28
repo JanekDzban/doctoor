@@ -46,8 +46,9 @@ const MedicinesReminderIntentHandler = {
             }
         }
 
-        if(slots.isRecurring === "true") {
-            if(slots.frequency) {
+        if(slots.isRecurring.value === "true" || 
+            slots.isRecurring.resolutions.resolutionsPerAuthority.values[0].value === "true") {
+            if(slots.frequency.value) {
                 const scheduledMoment = Moment(scheduledTime, Settings.dates.format);
                 reminderRequest.trigger.recurrence = {
                     //"startDateTime": "2019-05-10T6:00:00.000",
@@ -74,7 +75,8 @@ const MedicinesReminderIntentHandler = {
         const reminderApiClient = handlerInput.serviceClientFactory.getReminderManagementServiceClient();
         var speakOutput = `You have successfully scheduled a reminder for taking 
             ${slots.medicine.value} on ${slots.date.value} at ${slots.time.value}.`;
-        if(slots.isRecurring === "true") {
+        if(slots.isRecurring.value === "true" || 
+            slots.isRecurring.resolutions.resolutionsPerAuthority.values[0].value === "true") {
             speakOutput += `The reminder will be repeated ${slots.frequency}.`;
         }
         try {
