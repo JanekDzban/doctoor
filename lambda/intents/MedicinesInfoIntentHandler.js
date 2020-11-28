@@ -12,20 +12,17 @@ const MedicinesInfoIntentHandler = {
     handle(handlerInput) {
         const drugName = handlerInput.requestEnvelope.request.intent.slots.medicineName.value;
         
+        var fs = require('fs');
+        var data = JSON.parse(fs.readFileSync('./intents/data.json', 'utf8'));
+        
+        
         return handlerInput.responseBuilder
-            .speak(lookupMedicine(drugName).description)
+            .speak(data[drugName])
             .reprompt('add a reprompt if you want to keep the session open for the user to respond')
             .getResponse();
     }
 };
 
-const lookupMedicine = (medicineName) => {
-    var fs = require('fs');
-    var obj = JSON.parse(fs.readFileSync('./intents/data.json', 'utf8'));
-
-    console.log(obj['xanax']);
-    return "dupa";
-}
 
 /*
 const lookupMedicine = (medicineName) => {
