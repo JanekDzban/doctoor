@@ -64,7 +64,7 @@ const MedicinesReminderIntentHandler = {
                     case "weekly": add = `;BYDAY=${scheduledMoment.format("dd").toUpperCase()};`; break;
                     case "monthly": add = `;BYMONTHDAY=${scheduledMoment.format("D")}`; break;
                 }
-                reminderRequest.trigger.reccurence.reccurenceRules[0] += add;
+                reminderRequest.trigger.reccurence.recurrenceRules[0] += add;
             } else { 
                 return handlerInput.responseBuilder
                     .speak("How often this reminder should be repeated? You can set daily, weekly, or monthly reminder.")
