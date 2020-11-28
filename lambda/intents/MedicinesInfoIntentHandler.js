@@ -12,7 +12,7 @@ const MedicinesInfoIntentHandler = {
         
         console.log('data read');
         console.log(data);
-        console.log(data[0]);
+        console.log(data[drugName]);
         
         return handlerInput.responseBuilder
             .speak(data[drugName].description)
