@@ -1,7 +1,4 @@
 const Alexa = require('ask-sdk-core');
-    
-var csvdb = require("node-csv-query");
-var databaseConnection = null;
 
 const MedicinesInfoIntentHandler = {
     canHandle(handlerInput) {
