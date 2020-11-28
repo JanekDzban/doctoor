@@ -45,7 +45,8 @@ const MedicinesReminderIntentHandler = {
                 "status" : "ENABLED"
             }
         }
-
+        console.log(`slots.isRecurring.value = ${slots.isRecurring.value}`);
+        console.log(slots.isRecurring.resolutions.resolutionsPerAuthority[0].values[0].value);
         if(slots.isRecurring.value === "true" || 
             slots.isRecurring.resolutions.resolutionsPerAuthority[0].values[0].value === "true") {
             console.log(`slots.frequency.value = ${slots.frequency.value}`);
