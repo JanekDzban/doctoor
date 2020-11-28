@@ -25,13 +25,6 @@ const MedicinesReminderIntentHandler = {
                 }).getResponse();
         }
         const slots = reqEnv.request.intent.slots;
-        //
-        console.log(`Settings.dates.timezone = ${Settings.dates.timezone}`);
-        console.log(`Moment().tz(Settings.dates.timezone) = ${Moment().tz(Settings.dates.timezone)}`);
-        console.log(`Settings.dates.format) = ${Settings.date.format}`);
-        console.log(`Moment().tz(Settings.dates.timezone).format(Settings.dates.format) = 
-            ${Moment().tz(Settings.dates.timezone).format(Settings.dates.format)}`);
-        //
         const scheduledTime = `${slots.date.value}T${slots.time.value}`;
         const reminderRequest = {
             "requestTime" : Moment().tz(Settings.dates.timezone).format(Settings.dates.format),
