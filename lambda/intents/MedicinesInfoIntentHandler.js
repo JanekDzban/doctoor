@@ -10,6 +10,10 @@ const MedicinesInfoIntentHandler = {
         var fs = require('fs');
         var data = JSON.parse(fs.readFileSync('./intents/data.json', 'utf8'));
         
+        console.log('data read');
+        console.log(data);
+        console.log(data[0]);
+        
         return handlerInput.responseBuilder
             .speak(data[drugName].description)
             .reprompt('add a reprompt if you want to keep the session open for the user to respond')
