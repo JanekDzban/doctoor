@@ -78,6 +78,7 @@ const MedicinesReminderIntentHandler = {
             speakOutput += `The reminder will be repeated ${slots.frequency}.`;
         }
         try {
+            console.log(reminderRequest);
             await reminderApiClient.createReminder(reminderRequest);
         } catch(error) {
             console.log(error);
