@@ -27,24 +27,18 @@ const MedicinesReminderIntentHandler = {
         const slots = reqEnv.request.intent.slots;
         //
         console.log(`Settings.dates.timezone = ${Settings.dates.timezone}`);
-        console.log(`Moment().tz(Settings.dates.timezone) = ${Moment().tz(Settings.dates.format)}`);
-        console.log(`Moment.ISO_8601 = ${Moment.ISO_8601}`);
+        console.log(`Moment().tz(Settings.dates.timezone) = ${Moment().tz(Settings.dates.timezone)}`);
+        console.log(`Settings.dates.format) = ${Settings.date.format}`);
+        console.log(`Moment().tz(Settings.dates.timezone).format(Settings.dates.format) = 
+            ${Moment().tz(Settings.dates.timezone).format(Settings.dates.format)}`);
         //
+        const scheduledTime = `${slots.date.value}T${slots.time.value}`;
         const reminderRequest = {
             "requestTime" : Moment().tz(Settings.dates.timezone).format(Settings.dates.format),
             "trigger": {
                 "type" : "SCHEDULED_ABSOLUTE",
-                "scheduledTime" : `${slots.date.value}T${slots.time.value}`,
+                "scheduledTime" : scheduledTime,
                 "timeZoneId" : Settings.dates.timezone,
-                /*"recurrence" : {                     
-                    "startDateTime": "2019-05-10T6:00:00.000",                       
-                    "endDateTime" : "2019-08-10T10:00:00.000",  
-                    "recurrenceRules" : [                                          
-                        "FREQ=DAILY;BYHOUR=6;BYMINUTE=10;BYSECOND=0;INTERVAL=1;",
-                        "FREQ=DAILY;BYHOUR=17;BYMINUTE=15;BYSECOND=0;INTERVAL=1;",
-                        "FREQ=DAILY;BYHOUR=22;BYMINUTE=45;BYSECOND=0;INTERVAL=1;"
-                    ]             
-                }*/
             },
             "alertInfo": {
                 "spokenInfo": {
@@ -59,9 +53,37 @@ const MedicinesReminderIntentHandler = {
             }
         }
 
+        if(slots.isRecurring === "true") {
+            if(slots.frequency) {
+                const scheduledMoment = Moment(scheduledTime, Settings.dates.format);
+                reminderRequest.trigger.recurrence = {
+                    "startDateTime": "2019-05-10T6:00:00.000",
+                    "endDateTime" : "2019-08-10T10:00:00.000",
+                    "recurrenceRules" : [
+                        `FREQ=${slots.frequency};
+                        BYHOUR=${scheduledMoment.hour()};
+                        BYMINUTE=${scheduledMoment.minute()};
+                        BYSECOND=${scheduledMoment.second()};
+                        INTERVAL=1;`,
+                    ]
+                }
+            } else return handlerInput.responseBuilder
+                .speak("How often this reminder should be repeated? You can set daily, weekly, or monthly reminder.")
+                .addElicitSlotDirective("frequency", {
+                    name: "MedicinesReminderIntent",
+                    confirmationStatus: "NONE",
+                    slots: {}
+                })
+                .reprompt()
+                .getResponse();
+        }
+
         const reminderApiClient = handlerInput.serviceClientFactory.getReminderManagementServiceClient();
         var speakOutput = `You have successfully scheduled a reminder for taking 
-            ${slots.medicine.value} on ${slots.date.value} at ${slots.time.value}`;
+            ${slots.medicine.value} on ${slots.date.value} at ${slots.time.value}.`;
+        if(slots.isRecurring === "true") {
+            speakOutput += `The reminder will be repeated ${slots.frequency}.`;
+        }
         try {
             await reminderApiClient.createReminder(reminderRequest);
         } catch(error) {

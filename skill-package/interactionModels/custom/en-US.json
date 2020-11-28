@@ -60,14 +60,120 @@
                 "{time}",
                 "at {time}"
               ]
+            },
+            {
+              "name": "isRecurring",
+              "type": "boolean",
+              "samples": [
+                "please",
+                "sure",
+                "nah",
+                "nope",
+                "no",
+                "yes"
+              ]
+            },
+            {
+              "name": "frequency",
+              "type": "eventFrequency"
             }
           ],
           "samples": [
             "Remind me about taking {medicine}"
           ]
+        },
+        {
+          "name": "MedicinesInfoIntent",
+          "slots": [
+            {
+              "name": "medicineName",
+              "type": "AMAZON.SearchQuery"
+            }
+          ],
+          "samples": [
+            "Find information about {medicineName}",
+            "Describe {medicineName}",
+            "What is {medicineName}"
+          ]
+        },
+        {
+          "name": "MedicinesConflictIntent",
+          "slots": [
+            {
+              "name": "medicineName",
+              "type": "AMAZON.SearchQuery"
+            }
+          ],
+          "samples": [
+            "what medicines should i not take with {medicineName}",
+            "what dedicines should not be taken with {medicineName}"
+          ]
         }
       ],
-      "types": []
+      "types": [
+        {
+          "values": [
+            {
+              "name": {
+                "value": "false",
+                "synonyms": [
+                  "nope",
+                  "nah",
+                  "not really",
+                  "no"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "true",
+                "synonyms": [
+                  "please",
+                  "of course",
+                  "sure",
+                  "yes"
+                ]
+              }
+            }
+          ],
+          "name": "boolean"
+        },
+        {
+          "values": [
+            {
+              "name": {
+                "value": "monthly",
+                "synonyms": [
+                  "once a month",
+                  "every month",
+                  "each month"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "weekly",
+                "synonyms": [
+                  "once a week",
+                  "every week",
+                  "each week"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "daily",
+                "synonyms": [
+                  "once a day",
+                  "every day",
+                  "each day"
+                ]
+              }
+            }
+          ],
+          "name": "eventFrequency"
+        }
+      ]
     },
     "dialog": {
       "intents": [
@@ -83,7 +189,17 @@
               "confirmationRequired": false,
               "prompts": {
                 "elicitation": "Elicit.Slot.1388899960576.734412436443"
-              }
+              },
+              "validations": [
+                {
+                  "type": "isNotInSet",
+                  "prompt": "Slot.Validation.1096385276090.520253254097.1348088442507",
+                  "values": [
+                    "medicine",
+                    "drug"
+                  ]
+                }
+              ]
             },
             {
               "name": "date",
@@ -102,9 +218,45 @@
               "prompts": {
                 "elicitation": "Elicit.Slot.1388899960576.605210575817"
               }
+            },
+            {
+              "name": "isRecurring",
+              "type": "boolean",
+              "elicitationRequired": true,
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Slot.1096385276090.1335156189350"
+              }
+            },
+            {
+              "name": "frequency",
+              "type": "eventFrequency",
+              "elicitationRequired": false,
+              "confirmationRequired": false,
+              "prompts": {},
+              "validations": [
+                {
+                  "type": "hasEntityResolutionMatch",
+                  "prompt": "Slot.Validation.1096385276090.751271238260.326350649032"
+                }
+              ]
             }
           ],
           "delegationStrategy": "ALWAYS"
+        },
+        {
+          "name": "MedicinesInfoIntent",
+          "confirmationRequired": false,
+          "prompts": {},
+          "slots": [
+            {
+              "name": "medicineName",
+              "type": "AMAZON.SearchQuery",
+              "elicitationRequired": false,
+              "confirmationRequired": false,
+              "prompts": {}
+            }
+          ]
         }
       ],
       "delegationStrategy": "ALWAYS"
@@ -140,8 +292,47 @@
             "value": "What time should I remind you?"
           }
         ]
+      },
+      {
+        "id": "Slot.Validation.1096385276090.520253254097.1348088442507",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "What medicine should you take?"
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Slot.1096385276090.1335156189350",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "Should this reminder be repeated?"
+          },
+          {
+            "type": "PlainText",
+            "value": "Should this reminder be recurring?"
+          },
+          {
+            "type": "PlainText",
+            "value": "Would you like to have this reminder reccuring?"
+          },
+          {
+            "type": "PlainText",
+            "value": "Would you like to repeat this reminder?"
+          }
+        ]
+      },
+      {
+        "id": "Slot.Validation.1096385276090.751271238260.326350649032",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "You can set the reminder to be daily, weekly, or monthly repeated. Which option would you like to set?"
+          }
+        ]
       }
     ]
   },
-  "version": "6"
+  "version": "12"
 }
