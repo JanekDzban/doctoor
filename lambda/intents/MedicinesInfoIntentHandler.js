@@ -1,5 +1,5 @@
 const Alexa = require('ask-sdk-core');
-const s3 = require('s3')''
+const s3 = require('s3');
 
 const MedicinesInfoIntentHandler = {
     canHandle(handlerInput) {
