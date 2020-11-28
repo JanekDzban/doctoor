@@ -1,4 +1,3 @@
-'use strict';
 const Alexa = require('ask-sdk-core');
     
 var csvdb = require("node-csv-query");
