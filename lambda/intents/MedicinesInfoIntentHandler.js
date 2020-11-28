@@ -21,7 +21,7 @@ const MedicinesInfoIntentHandler = {
 
 const lookupMedicine = (medicineName) => {
     var fs = require('fs');
-    var obj = JSON.parse(fs.readFileSync('data.json', 'utf8'));
+    var obj = JSON.parse(fs.readFileSync('./data.json', 'utf8'));
 
     console.log(obj);
     return obj.description;
