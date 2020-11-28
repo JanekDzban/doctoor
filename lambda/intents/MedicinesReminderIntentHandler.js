@@ -25,7 +25,8 @@ const MedicinesReminderIntentHandler = {
                 }).getResponse();
         }
         const slots = reqEnv.request.intent.slots;
-        const scheduledTime = `${slots.date.value}T${slots.time.value}`;
+        const scheduledTime = `${slots.date.value}T${mapTimeToHour(slots.time.value)}`;
+        const scheduledMoment = Moment(scheduledTime, Settings.dates.format);
         const reminderRequest = {
             "requestTime" : Moment().tz(Settings.dates.timezone).format(Settings.dates.format),
             "trigger": {
@@ -51,7 +52,6 @@ const MedicinesReminderIntentHandler = {
             slots.isRecurring.resolutions.resolutionsPerAuthority[0].values[0].value === "true") {
             console.log(`slots.frequency.value = ${slots.frequency.value}`);
             if(slots.frequency.value) {
-                const scheduledMoment = Moment(scheduledTime, Settings.dates.format);
                 reminderRequest.trigger.recurrence = {
                     //"startDateTime": "2019-05-10T6:00:00.000",
                     //"endDateTime" : "2019-08-10T10:00:00.000",
@@ -78,7 +78,8 @@ const MedicinesReminderIntentHandler = {
 
         const reminderApiClient = handlerInput.serviceClientFactory.getReminderManagementServiceClient();
         var speakOutput = `You have successfully scheduled a reminder for taking 
-            ${slots.medicine.value} on ${slots.date.value} at ${slots.time.value.replace(":00","")}.`;
+            ${slots.medicine.value} on ${slots.date.value} 
+            at ${scheduledMoment.hour}:${scheduledMoment.minutes.replace(":00","")}.`;
         if(slots.isRecurring.value === "true" || 
             slots.isRecurring.resolutions.resolutionsPerAuthority[0].values[0].value === "true") {
             speakOutput += `The reminder will be repeated ${slots.frequency}.`;
@@ -97,5 +98,15 @@ const MedicinesReminderIntentHandler = {
             .getResponse();
     }
 };
+
+function mapTimeToHour(time) {
+    const map = {
+        "MO" : "08:00",
+        "AF" : "13:00",
+        "EV" : "18:00",
+        "NI" : "23:00"
+    }
+    return map[time] ? map[time] : time;
+}
 
 module.exports = MedicinesReminderIntentHandler;
