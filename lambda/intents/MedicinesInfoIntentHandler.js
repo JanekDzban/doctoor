@@ -6,10 +6,10 @@ const MedicinesReminderIntentHandler = {
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'MedicinesReminderIntent';
     },
     async handle(handlerInput) {
-
+        const speakOut = 'Tada!';
         return handlerInput.responseBuilder
-            .speak("Tada!!")
-            //.reprompt('add a reprompt if you want to keep the session open for the user to respond')
+            .speak(speakOut)
+            .reprompt(speakOut)
             .getResponse();
     }
 };
