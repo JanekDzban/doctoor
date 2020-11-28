@@ -63,8 +63,7 @@ const MedicinesReminderIntentHandler = {
                     ]
                 }
             } else { 
-                /*return handlerInput.responseBuilder*/
-                return reqEnv.request.intent
+                return handlerInput.responseBuilder
                     .speak("How often this reminder should be repeated? You can set daily, weekly, or monthly reminder.")
                     .addElicitSlotDirective('frequency', reqEnv.request.intent)
                 /*.addElicitSlotDirective("frequency", {
