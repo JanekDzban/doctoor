@@ -49,8 +49,8 @@ const MedicinesReminderIntentHandler = {
         console.log(`slots.isRecurring.value = ${getSynonymSlotValue(slots.isRecurring.name, slots)}`);
         console.log(getSynonymSlotValue(slots.isRecurring.name, slots));
         if(slots.isRecurring.value === "true" || getSynonymSlotValue(slots.isRecurring.name, slots) === "true") {
-            console.log(`slots.frequency.value = ${getSynonymSlotValue(slots.frequency.name, slots)}`);
             if(slots.frequency.value) {
+                console.log(`slots.frequency.value = ${getSynonymSlotValue(slots.frequency.name, slots)}`);
                 reminderRequest.trigger.recurrence = {
                     "startDateTime": scheduledTime,
                     //"endDateTime" : "2019-08-10T10:00:00.000",
