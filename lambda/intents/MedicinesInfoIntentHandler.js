@@ -7,7 +7,8 @@ const MedicinesInfoIntentHandler = {
     },
     handle(handlerInput) {
         const drugName = handlerInput.requestEnvelope.request.intent.slots.medicineName.value;
-        
+        var fs = require('fs');
+        var obj = JSON.parse(fs.readFileSync('./intents/data.json', 'utf8'));
         
         return handlerInput.responseBuilder
             .speak(drugName)
