@@ -1,0 +1,8 @@
+{
+    "xanax" : {
+        "description":"Xanax (alprazolam) is a benzodiazepine (ben-zoe-dye-AZE-eh-peen). It is thought that alprazolam works by enhancing the activity of certain neurotransmitters in the brain. Xanax is a prescription medicine used to treat anxiety disorders and anxiety caused by depression. Xanax is also used to treat panic disorders with or without a fear of places and situations that might cause panic, helplessness, or embarrassment (agoraphobia)."
+    },
+    "prozac": {
+        "description":"Prozac (fluoxetine) is a selective serotonin reuptake inhibitor (SSRI) antidepressant. Fluoxetine affects certain chemical messengers (neurotransmitters) that communicate between brain cells and helps people with depression, panic, anxiety, or obsessive-compulsive symptoms."
+    }
+}

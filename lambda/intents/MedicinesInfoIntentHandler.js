@@ -1,6 +1,8 @@
 const Alexa = require('ask-sdk-core');
-const aws = require('aws-sdk');
+
+/* const aws = require('aws-sdk');
 const s3 = new aws.S3();
+*/
 
 const MedicinesInfoIntentHandler = {
     canHandle(handlerInput) {
@@ -17,6 +19,15 @@ const MedicinesInfoIntentHandler = {
     }
 };
 
+const lookupMedicine = (medicineName) => {
+    var fs = require('fs');
+    var obj = JSON.parse(fs.readFileSync('data.json', 'utf8'));
+
+    console.log(obj);
+    return obj.description;
+}
+
+/*
 const lookupMedicine = (medicineName) => {
     return new Promise((resolve, reject) => {
         try {
@@ -81,5 +92,5 @@ const lookupMedicine = (medicineName) => {
         }
     })
 };
-
+*/
 module.exports = MedicinesInfoIntentHandler;
