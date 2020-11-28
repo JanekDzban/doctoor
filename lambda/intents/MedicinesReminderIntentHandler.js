@@ -79,7 +79,7 @@ const MedicinesReminderIntentHandler = {
         const reminderApiClient = handlerInput.serviceClientFactory.getReminderManagementServiceClient();
         var speakOutput = `You have successfully scheduled a reminder for taking 
             ${slots.medicine.value} on ${slots.date.value} 
-            at ${scheduledMoment.hour()}:${scheduledMoment.minute().replace(":00","")}.`;
+            at ${scheduledMoment.hour().toString()}:${scheduledMoment.minute().toString().replace(":00","")}.`;
         if(slots.isRecurring.value === "true" || 
             slots.isRecurring.resolutions.resolutionsPerAuthority[0].values[0].value === "true") {
             speakOutput += `The reminder will be repeated ${slots.frequency}.`;
