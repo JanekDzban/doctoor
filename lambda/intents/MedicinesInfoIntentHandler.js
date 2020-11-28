@@ -9,7 +9,8 @@ const MedicinesInfoIntentHandler = {
         const drugName = handlerInput.requestEnvelope.request.intent.slots.medicineName.value;
 
         var MongoClient = require('mongodb').MongoClient;
-
+        let drugInfo;
+        
         MongoClient.connect("mongodb+srv://drugdb:drugdbadmin@cluster0.zoed5.mongodb.net/drugsDB?retryWrites=true&w=majority", function (err, db) {
 
             db.collection('drugsInfo', function (err, collection) {
