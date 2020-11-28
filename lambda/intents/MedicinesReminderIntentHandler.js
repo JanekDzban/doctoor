@@ -46,10 +46,10 @@ const MedicinesReminderIntentHandler = {
                 "status" : "ENABLED"
             }
         }
-        console.log(`slots.isRecurring.value = ${slots.isRecurring.value}`);
+        console.log(`slots.isRecurring.value = ${getSynonymSlotValue(slots.isRecurring.name, slots)}`);
         console.log(getSynonymSlotValue(slots.isRecurring.name, slots));
         if(slots.isRecurring.value === "true" || getSynonymSlotValue(slots.isRecurring.name, slots) === "true") {
-            console.log(`slots.frequency.value = ${slots.frequency.value}`);
+            console.log(`slots.frequency.value = ${getSynonymSlotValue(slots.frequenct.name, slots)}`);
             if(slots.frequency.value) {
                 reminderRequest.trigger.recurrence = {
                     "startDateTime": scheduledTime,
@@ -72,13 +72,12 @@ const MedicinesReminderIntentHandler = {
 
         const reminderApiClient = handlerInput.serviceClientFactory.getReminderManagementServiceClient();
         var speakOutput = `You have successfully scheduled a reminder for taking 
-            ${slots.medicine.value} on ${slots.date.value} 
-            at ${scheduledMoment.hour()}`;
+            ${slots.medicine.value} on ${slots.date.value} at ${scheduledMoment.hour()}`;
         if(scheduledMoment.minute() > 0) {
             speakOutput += `:${('0' + scheduledMoment.minute()).slice(-2)}`;
         }
         if(slots.isRecurring.value === "true" || getSynonymSlotValue(slots.isRecurring.name, slots) === "true") {
-            speakOutput += `The reminder will be repeated ${slots.frequency}.`;
+            speakOutput += `. The reminder will be repeated ${getSynonymSlotValue(slots.frequency.name, slots)}.`;
         }
         console.log(reminderRequest);
         console.log(speakOutput);
