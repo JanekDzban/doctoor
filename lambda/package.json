@@ -9,9 +9,11 @@
   "author": "Amazon Alexa",
   "license": "ISC",
   "dependencies": {
+    "app-settings": "^1.1.0",
     "ask-sdk-core": "^2.6.0",
     "ask-sdk-model": "^1.18.0",
-    "aws-sdk": "^2.326.0"
+    "aws-sdk": "^2.326.0",
+    "moment-timezone": "^0.5.32"
   },
   "devDependencies": {
     "eslint": "^7.14.0"
