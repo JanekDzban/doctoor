@@ -1,6 +1,13 @@
 const Alexa = require('ask-sdk-core');
 const https = require('https');
 
+// How to test it?
+// open doctoor
+// what medicines should i not take with apap
+//  expected result: I checked apap and found 2 conflicts that you <emphasis level="strong">should not</emphasis> take <break time="1s"/> Velosef Xanas
+// what medicines should i not take with cox
+//  expected result: I was not able to find any data.
+
 const MedicinesConflictIntentHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
