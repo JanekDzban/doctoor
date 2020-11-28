@@ -50,8 +50,8 @@ const MedicinesReminderIntentHandler = {
             if(slots.frequency) {
                 const scheduledMoment = Moment(scheduledTime, Settings.dates.format);
                 reminderRequest.trigger.recurrence = {
-                    "startDateTime": "2019-05-10T6:00:00.000",
-                    "endDateTime" : "2019-08-10T10:00:00.000",
+                    //"startDateTime": "2019-05-10T6:00:00.000",
+                    //"endDateTime" : "2019-08-10T10:00:00.000",
                     "recurrenceRules" : [
                         `FREQ=${slots.frequency};
                         BYHOUR=${scheduledMoment.hour()};
