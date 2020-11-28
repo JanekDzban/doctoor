@@ -1,4 +1,5 @@
 const Alexa = require('ask-sdk-core');
+const MongoClient = require('mongodb').MongoClient;
 
 const MedicinesInfoIntentHandler = {
     canHandle(handlerInput) {
