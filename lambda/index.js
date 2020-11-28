@@ -38,7 +38,9 @@ const HelpIntentHandler = {
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.HelpIntent';
     },
     handle(handlerInput) {
-        const speakOutput = 'You can say hello to me! How can I help?';
+        const speakOutput = `You can ask me to do the following things: 
+            remind about taking a medicine, setup an appointment with a doctor, 
+            search for medicines you should not mix, find information about particular medicine`;
 
         return handlerInput.responseBuilder
             .speak(speakOutput)

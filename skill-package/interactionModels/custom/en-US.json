@@ -108,6 +108,25 @@
             "what medicines should i not take with {medicineName}",
             "what dedicines should not be taken with {medicineName}"
           ]
+        },
+        {
+          "name": "AppointmentIntent",
+          "slots": [
+            {
+              "name": "doctor",
+              "type": "AMAZON.Professional",
+              "samples": [
+                "{doctor}",
+                "I need {doctor}"
+              ]
+            }
+          ],
+          "samples": [
+            "make reservation to {doctor}",
+            "set up appointment with {doctor}",
+            "reserve {doctor}",
+            "make appointment to {doctor}"
+          ]
         }
       ],
       "types": [
@@ -257,6 +276,42 @@
               "prompts": {}
             }
           ]
+        },
+        {
+          "name": "AppointmentIntent",
+          "confirmationRequired": false,
+          "prompts": {},
+          "slots": [
+            {
+              "name": "doctor",
+              "type": "AMAZON.Professional",
+              "elicitationRequired": true,
+              "confirmationRequired": false,
+              "prompts": {
+                "elicitation": "Elicit.Slot.386357110740.765358756516"
+              },
+              "validations": [
+                {
+                  "type": "isInSet",
+                  "prompt": "Slot.Validation.386357110740.765358756516.840008242010",
+                  "values": [
+                    "Cardiologist",
+                    "Oncologist",
+                    "Gynecologist",
+                    "Allergist",
+                    "Neurologist",
+                    "Urologist",
+                    "Primary care doctor",
+                    "Dermatologist",
+                    "Pediatrician",
+                    "Radiologist",
+                    "Psychiatrist"
+                  ]
+                }
+              ]
+            }
+          ],
+          "delegationStrategy": "ALWAYS"
         }
       ],
       "delegationStrategy": "ALWAYS"
@@ -331,8 +386,26 @@
             "value": "You can set the reminder to be daily, weekly, or monthly repeated. Which option would you like to set?"
           }
         ]
+      },
+      {
+        "id": "Slot.Validation.386357110740.765358756516.840008242010",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "You can choose Dermatologist, Allergist, Cardiologist, Urologist, Neurologist, Psychiatrist, Oncologist, Radiologist, Gynecologist, Pediatrician or Primary care doctor"
+          }
+        ]
+      },
+      {
+        "id": "Elicit.Slot.386357110740.765358756516",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "What kind of doctor do You need?"
+          }
+        ]
       }
     ]
   },
-  "version": "12"
+  "version": "15"
 }
