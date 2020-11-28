@@ -21,7 +21,7 @@ const lookupMedicine = (medicineName) => {
     return new Promise((resolve, reject) => {
         try {
             const bucketName = process.env.S3_PERSISTENCE_BUCKET;
-            const keyName = 'RPL.csv';
+            const keyName = 'Media/Doctoor.MedicinesInfo/RPL.csv';
             const query = `SELECT id from S3Object s WHERE s.name ='${medicineName}' LIMIT 1`;
             let returnVal = 0;
             
