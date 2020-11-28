@@ -63,14 +63,16 @@ const MedicinesReminderIntentHandler = {
                     ]
                 }
             } else { 
-                return handlerInput.responseBuilder
-                .speak("How often this reminder should be repeated? You can set daily, weekly, or monthly reminder.")
-                .addElicitSlotDirective("frequency", {
+                /*return handlerInput.responseBuilder*/
+                return reqEnv.request.intent
+                    .speak("How often this reminder should be repeated? You can set daily, weekly, or monthly reminder.")
+                    .addElicitSlotDirective('frequency', reqEnv.request.intent)
+                /*.addElicitSlotDirective("frequency", {
                     name: "MedicinesReminderIntent",
                     confirmationStatus: "NONE",
                     slots: {}
-                })
-                .reprompt()
+                })*/
+                //.reprompt()
                 .getResponse();
             }
         }
