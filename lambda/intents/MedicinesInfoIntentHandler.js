@@ -7,15 +7,30 @@ const MedicinesInfoIntentHandler = {
     },
     handle(handlerInput) {
         const drugName = handlerInput.requestEnvelope.request.intent.slots.medicineName.value;
-        var fs = require('fs');
-        var data = JSON.parse(fs.readFileSync('./intents/data.json', 'utf8'));
-        
-        console.log('data read');
-        console.log(data);
-        console.log(data['xanax']);
-        
+
+        var MongoClient = require('mongodb').MongoClient;
+
+        MongoClient.connect("mongodb+srv://drugdb:drugdbadmin@cluster0.zoed5.mongodb.net/drugsDB?retryWrites=true&w=majority", function (err, db) {
+
+            db.collection('drugsInfo', function (err, collection) {
+                const query = { "name": { "$eq": drugName } };
+                var drugInfo = itemsCollection.findOne(query, projection)
+                .then(result => {
+                  if(result) {
+                    console.log(`Successfully found document: ${result}.`);
+                  } else {
+                    console.log("No document matches the provided query.");
+                  }
+                  return result;
+                })
+                .catch(err => console.error(`Failed to find document: ${err}`));
+
+            });
+
+        });
+
         return handlerInput.responseBuilder
-            .speak(data[drugName].description)
+            .speak(drugInfo.commonName)
             .reprompt('add a reprompt if you want to keep the session open for the user to respond')
             .getResponse();
     }
