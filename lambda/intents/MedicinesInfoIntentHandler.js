@@ -17,6 +17,7 @@ const MedicinesInfoIntentHandler = {
         
         
         return handlerInput.responseBuilder
+            .speak("Drama!")
             .speak(data[drugName])
             .reprompt('add a reprompt if you want to keep the session open for the user to respond')
             .getResponse();
