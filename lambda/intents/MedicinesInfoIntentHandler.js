@@ -12,7 +12,9 @@ const MedicinesInfoIntentHandler = {
     handle(handlerInput) {
         
         return handlerInput.responseBuilder
-            .speak(handlerInput.requestEnvelope.request.intent.slots.medicineName.value)
+            const drugName = handlerInput.requestEnvelope.request.intent.slots.medicineName.value;
+        
+            .speak(drugName)
             //.reprompt('add a reprompt if you want to keep the session open for the user to respond')
             .getResponse();
     }
