@@ -14,7 +14,7 @@ const MedicinesInfoIntentHandler = {
 
             db.collection('drugsInfo', function (err, collection) {
                 const query = { "name": { "$eq": drugName } };
-                var drugInfo = collection.findOne(query, projection)
+                var drugInfo = collection.findOne(query)
                 .then(result => {
                   if(result) {
                     console.log(`Successfully found document: ${result}.`);
