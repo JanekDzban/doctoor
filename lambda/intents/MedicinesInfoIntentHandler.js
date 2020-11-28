@@ -4,7 +4,7 @@ const MongoClient = require('mongodb').MongoClient;
 const uri = "mongodb+srv://drugdb:drugdbadmin@cluster0.zoed5.mongodb.net/drugsDB?retryWrites=true&w=majority";
 const client = new MongoClient(uri, { useNewUrlParser: true });
 client.connect(err => {
-    const collection = client.db("database").collection("data");
+    const collection = client.db("drugsDB").collection("drugsInfo");
     console.log(collection.countDocuments());
     client.close();
 });
