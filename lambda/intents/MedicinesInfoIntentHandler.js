@@ -1,5 +1,9 @@
+'use strict';
+
 const Alexa = require('ask-sdk-core');
-const s3 = require('s3');
+    
+var csvdb = require("node-csv-query");
+var databaseConnection = null;
 
 const MedicinesInfoIntentHandler = {
     canHandle(handlerInput) {
