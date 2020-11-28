@@ -25,11 +25,13 @@ const MedicinesReminderIntentHandler = {
                 }).getResponse();
         }
         const slots = reqEnv.request.intent.slots;
+        //
         console.log(`Settings.dates.timezone = ${Settings.dates.timezone}`);
-        console.log(`Moment().tz(Settings.dates.timezone) = ${Moment().tz(Settings.dates.timezone)}`);
+        console.log(`Moment().tz(Settings.dates.timezone) = ${Moment().tz(Settings.dates.format)}`);
         console.log(`Moment.ISO_8601 = ${Moment.ISO_8601}`);
+        //
         const reminderRequest = {
-            "requestTime" : Moment().tz(Settings.dates.timezone).format(Moment.ISO_8601),
+            "requestTime" : Moment().tz(Settings.dates.timezone).format(Settings.dates.format),
             "trigger": {
                 "type" : "SCHEDULED_ABSOLUTE",
                 "scheduledTime" : `${slots.date.value}T${slots.time.value}`,

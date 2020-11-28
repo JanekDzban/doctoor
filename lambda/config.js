@@ -5,6 +5,7 @@ config.auth = {};
 
 //in a normal situation this whould be taken from users device settings
 config.dates.timezone = "Europe/Warsaw";
+config.dates.format = "YYYY-MM-DDTHH:mm:ss";
 //not sure if this will be used, put it just in case
 config.auth.token = `eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6IjEifQ
     .eyJhdWQiOiJodHRwczovL2FwaS5hbWF6b25hbGV4YS5jb20iLCJpc3MiOiJBbGV4YV
